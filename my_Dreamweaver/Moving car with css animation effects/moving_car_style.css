@@ -1,0 +1,42 @@
+*{
+	margin: 0;
+	padding: 0;
+	
+}
+
+.car{
+	position: relative;
+	bottom: -390px;
+	left: 100px;
+	transition: all 1.5s ease-in-out;
+}
+ 
+.car:hover{
+	position: relative;
+	left: 200px;
+}
+
+.bg{
+	position: relative;
+	background: #00fdff url("background.jpg");
+	height: 100vh;
+	background-size: cover;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	animation: animate 30s linear infinite;
+}
+
+
+
+
+
+@keyframes animate{
+	from{
+		background-position: 0 0;
+	}
+	to{
+		background-position: 100% 0;
+	}
+}
+
+
