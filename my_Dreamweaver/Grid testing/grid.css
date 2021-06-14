@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+
+body {
+	margin: 8px;
+	background-image: linear-gradient(35deg, #b4f0fd, #646464)
+	
+	
+}
+#grid-container-head {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
+	grid-gap: 20px;
+	
+}
+		.grid-item{
+			background-color: rgba(0,0,0,0.00);
+			
+			padding: 2px;
+			font-size: 15px;
+		    text-align: center;
+			
+		}
+		.item1{
+			grid-row-start: 1;
+			grid-row-end: 3;
+			background-image: url("life.png");
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			height: 150px;
+			width: 350px;
+			border-radius: 8px;
+			
+		}
+		
+		.item3{
+			padding: 0;
+			background-image: linear-gradient(75deg,#2d3436, black);
+			grid-row-start: 2;
+			grid-row-end: 3;
+			width: auto;
+			height: 100px;
+			right: 100px;
+		      	
+		}
+
+/*=========================item 3 glow css ==================*/
+
+#body-buttons {
+	 box-sizing: border-box;
+	padding: 30px;
+  display: inline;
+  height: 100%;
+  place-items: center;
+  overflow: hidden;
+}
+button{
+  position: relative;
+  height: 60px;
+  width: 200px;
+  margin: 0 35px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  background: #111;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.5s;
+}
+button:first-child:hover{
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+}
+button:last-child:hover{
+  background: linear-gradient(90deg, #fa7199, #f5ce62, #e43603, #fa7199);
+  background-size: 400%;
+}
+button:first-child:before,
+button:last-child:before{
+  content: '';
+  position: absolute;
+  background: inherit;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  border-radius: 50px;
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+button:first-child:hover:before,
+button:last-child:hover:before{
+  opacity: 1;
+  z-index: -1;
+}
+button:hover{
+  z-index: 1;
+  animation: glow 8s linear infinite;
+}
+@keyframes glow {
+  0%{
+    background-position: 0%;
+  }
+  100%{
+    background-position: 400%;
+  }
+}
+
+
+
+/*=========================item 3 glow css ==================*/
+		
+		.item2{
+			width: auto;
+			height: 50px;
+			padding-left: 0;
+			padding-right: 0;
+			margin-left: 0;
+			margin-right: 0;
+			
+		}
+
+/*================================Navbar starts======================*/
+
+
+#navbar {
+	position: relative;
+	top: -240px;
+	margin: 270px auto 0;
+	width: 590px;
+	height: 50;
+	background: #303030;
+    border-radius: 8px;
+	font-size: 0;
+	box-shadow: 0 2px 3px 0 rgba(0,0,0,0.1);
+	
+}
+#navbar a {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: white;
+	text-decoration: none;
+	line-height: 50px;
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	text-align: center;
+	
+}
+
+nav .animation{
+	position: absolute;
+	height: 100%;
+	top: 0;
+	z-index: 0;
+	background: #ff488f;
+	width: 100px;
+	border-radius: 8px;
+	transition: all 0.5s ease 0s;
+		
+}
+
+
+a:nth-child(1){
+	width: 100px;
+}
+nav .start-home,a:nth-child(1):hover~.animation{
+	width: 100px;
+	left: 0;
+	
+}
+
+a:nth-child(2){
+	width: 110px;
+}
+nav .start-about,a:nth-child(2):hover~.animation{
+	width: 110px;
+	left: 100px;
+	
+}
+
+a:nth-child(3){
+	width: 100px;
+}
+nav .start-blog,a:nth-child(3):hover~.animation{
+	width: 100px;
+	left: 210px;
+	
+}
+
+a:nth-child(4){
+	width: 160px;
+}
+nav .start-portfolio,a:nth-child(4):hover~.animation{
+	width: 160px;
+	left: 310px;
+	
+}
+a:nth-child(5){
+	width: 120px;
+}
+nav .start-contact,a:nth-child(5):hover~.animation{
+	width: 120px;
+	left: 470px;
+	
+}
+/*===========================Navbar complete   xxxxxx  item2=====================================*/
+
+
+#grid-container-body {
+	display: grid;
+	grid-template-columns: auto 200px;
+	grid-gap: 20px;
+	
+}
+		
+		.item4{
+           
+			height: auto;
+			
+		}
+
+/*=====================================Crousal css Starts for item4===============================*/
+
+#carousel-main {
+	border-radius: 8px;
+  display: grid;
+  height: 100%;
+  place-items: center;
+  text-align: center;
+  background: rgba(236,236,236,0.44)
+}
+.slider{
+	border-radius: 8px;
+  max-width: 1100px;
+  display: flex;
+}
+.slider .card{
+  flex: 1;
+  margin: 0 10px;
+  background: #fff;
+	border-radius: 8px;
+}
+.slider .card .img{
+	border-radius: 8px;
+  height: 200px;
+  width: 100%;
+}
+.slider .card .img img{
+	border-radius: 8px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.slider .card .content{
+  padding: 10px 20px;
+}
+.card .content .title{
+  font-size: 25px;
+  font-weight: 600;
+}
+.card .content .sub-title{
+  font-size: 20px;
+  font-weight: 600;
+  color: #e74c3c;
+  line-height: 20px;
+}
+.card .content p{
+  text-align: justify;
+  margin: 10px 0;
+}
+.card .content .btn{
+  display: block;
+  text-align: left;
+  margin: 10px 0;
+}
+.card .content .btn button{
+  background: #ff488f;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.card .content .btn button:hover{
+  transform: scale(0.9);
+}
+
+/*===============================================Crausal Completes===================*/
+		
+		.item5{
+			
+			height: 90vh;
+			
+		}
+
+
+
+#grid-container-footer {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 20px;
+	
+}
+		
+		.item6{
+			height: 30vh;
+
+			
+		}
+.item6{
+			height: 30vh;
+
+			
+		}
