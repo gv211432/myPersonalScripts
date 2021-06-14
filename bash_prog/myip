@@ -1,0 +1,24 @@
+#!/bin/zsh
+
+#COMMANDS CREATED INSIDE /ETC/BASH.BASHRC FILE
+# USING ANSI COLORS
+RED="\e[31m"
+ORANGE="\e[33m"
+BLUE="\e[94m"
+GREEN="\e[92m"
+STOP="\e[0m"
+
+echo ""
+myip=($(curl -s ipinfo.io/ip)) #will send get request and get my public ip..
+print '\x1b[6;30;42m My Public Ip is : \x1b[0m '$myip 
+printf "${ORANGE}"
+figlet -f future $myip
+printf "${STOP}"
+
+ip=($(ip a | grep 192.168.))
+reNewIp=${ip[2]}
+no=$((${#reNewIp}-3))
+myip=${reNewIp}
+reqIp=${myip:0:${no}}
+print '\x1b[6;30;42m My Private Ip is : \x1b[0m '$reqIp
+figlet -f future $reqIp | lolcat

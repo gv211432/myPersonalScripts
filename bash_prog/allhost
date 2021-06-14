@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+ip=($(ip a | grep 192.168.))
+reNewIp=${ip[2]}
+no=$((${#reNewIp}-3))
+myip=${reNewIp}
+inip=${myip:0:${no}}
+
+nmap -sn ${inip}/24

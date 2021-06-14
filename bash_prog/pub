@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ip=($(ip a | grep 192.168.))
+gotip=${ip[1]}
+payload="This_is_test_Message_Form_Gaurav";
+
+mosquitto_pub -m ${payload} -h localhost -p 1883 -t "/tokenid/outTopic" -P "92244@Great" -u "gaurav" -q 1
+
+echo 
+
+exit 0

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ip=($(ip a | grep 192.168.))
+gotip=${ip[3]}
+reNewIp=${gotip:8}
+no=$((${#reNewIp}-4))
+myip=${reNewIp}
+reqIp=${myip:0:${no}}
+
+ssh boss@192.168.${reqIp}.229 
+
+
+exit 0

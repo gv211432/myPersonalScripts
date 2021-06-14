@@ -1,0 +1,23 @@
+Regular Colors:
+
+        \e[30m = Black
+        \e[31m = Red
+        \e[32m = Green
+        \e[33m = orange
+        \e[34m = Blue
+        \e[35m = Purple
+        \e[36m = Cyan
+        \e[37m = White
+        \e[0m  = stop
+
+Light Colors:
+
+        \e[90 = Light Black
+        \e[91 = Light Red
+        \e[92 = Light Green
+        \e[93 = Light Yellow
+        \e[94 = Light Blue
+        \e[95 = Light Purple
+        \e[96 = Light Cyan
+        \e[97 = Light White
+

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+myHr=$(date +%H)
+e=4
+f=6
+g=8
+a=12
+b=16
+c=22
+d=23
+
+
+if [ $myHr -lt $e ]
+then echo "Welcome Sir!! Enjoying night work!!" 
+
+elif [ $myHr -lt $f ]
+then echo "Welcome Sir!! Good Bharama Mhurata..!! Glad to see you at this time :]"
+
+elif [ $myHr -lt $g ]
+then echo "Welcome Sir!! Very Very !! Good Morning..."
+
+elif [ $myHr -lt $a ]
+then echo "Welcome Sir!! Good Morning.."
+
+elif [ $myHr -lt $b ]
+then echo "Welcome Sir!! Good Noon!!"
+
+elif [ $myHr -lt $c ] 
+then echo "Welcome Sir!! Good evening.."
+
+elif [ $myHr -lt $d ]
+then echo "Welcome Sir!! Time to Sleep!!"
+
+fi
