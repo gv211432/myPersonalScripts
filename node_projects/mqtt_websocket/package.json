@@ -1,0 +1,18 @@
+{
+  "name": "mosca_yarn",
+  "version": "1.0.0",
+  "description": "this is my first implementation of mosca on yarn!!",
+  "main": "index.js",
+  "author": "Gaurav Vishwakarma",
+  "license": "MIT",
+  "scripts": {
+    "test": "sudo node test.js",
+    "start": "sudo nodemon index.js",
+    "ws": "node wsClient"
+  },
+  "dependencies": {
+    "mosca": "^2.8.3",
+    "mqtt": "^4.2.6",
+    "ws": "^7.4.5"
+  }
+}

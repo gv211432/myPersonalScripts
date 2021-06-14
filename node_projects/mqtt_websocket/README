@@ -1,0 +1,21 @@
+Date: /01/05/2021/
+
+                ┏━┓┏━╸┏━┓╺┳┓┏┳┓┏━╸
+                ┣┳┛┣╸ ┣━┫ ┃┃┃┃┃┣╸
+                ╹┗╸┗━╸╹ ╹╺┻┛╹ ╹┗━╸
+
+========================== INTRO =============================
+
+The goal of this project is to translate the incoming mqtt to websocket and vice-versa.
+
+As I tried alot to directly communicate from react native app using mqtt protocol I was
+unsuccessful..
+
+I decided to build websocket connection with react native app and mqtt connection with
+machine.
+
+And just leverage the both connection in communicating with each other.
+
+Its also helpful in implementing more rules and filteration and function on server itself..
+
+======================= Functions ===============================

@@ -1,0 +1,422 @@
+ Date: /01/05/2021/                                       
+
+╻ ╻┏━╸┏┓    ┏━┓┏━╸┏━┓┏━┓┏━╸╻ ╻   ┏━╸┏━┓┏━┓   ┏━┓┏━┓┏━┓┏┓ ╻  ┏━╸┏┳┓┏━┓   
+┃╻┃┣╸ ┣┻┓   ┗━┓┣╸ ┣━┫┣┳┛┃  ┣━┫   ┣╸ ┃ ┃┣┳┛   ┣━┛┣┳┛┃ ┃┣┻┓┃  ┣╸ ┃┃┃┗━┓   
+┗┻┛┗━╸┗━┛   ┗━┛┗━╸╹ ╹╹┗╸┗━╸╹ ╹   ╹  ┗━┛╹┗╸   ╹  ╹┗╸┗━┛┗━┛┗━╸┗━╸╹ ╹┗━┛╹╹╹
+===================================================================================
+===================================================================================
+                                ╻┏┓╻╺┳┓┏━╸╻ ╻
+                                ┃┃┗┫ ┃┃┣╸ ┏╋┛
+                                ╹╹ ╹╺┻┛┗━╸╹ ╹
+
+
+1. Mosca broker client authentication?
+2. Schema error in mosca broker?
+3. webSocketServer node.js how to differentiate clients?
+4. How to check in node.js if variable is JSON object ?
+5. node.js - request - How to “emitter.setMaxListeners()”?
+
+
+
+>1
+===================================================================================
+===================================================================================
+
+We are using node.js' Mosca broker module for one of our applications. We are planning
+to add client authentication with a certificate on the broker side but I'm unable to find 
+any configuration or settings in Mosca has for client authentication.
+
+If the client is passing certificate then what is way to get the same at mosca broker side.
+Like in node js http request req.connection.getPeerCertificate() will give me the client 
+certificate and then I use the same to check the client authenticity
+@ghost
+ghost commented on Jan 7, 2016
+
+You can try do it.
+
+web page client:
+var client = mqtt.connect('ws://localhost:3000', {username:'1',password:'2'});
+
+node.js client
+var client = mqtt.connect('tcp://localhost:1883', { username: '1', password: '2' });
+
+Mosca broker
+
+var settings = {
+port: 1883,
+http: {
+port: 3000,
+bundle: true,
+static: './'
+}
+//backend: ascoltatore
+};
+
+server.on('ready', function () {
+console.log('Mosca server is up and running');
+server.authenticate = function (client, username, password, callback) {
+callback(null, (username === '1' && password.toString('ascii') === '2'));
+};
+});
+
+
+>2
+===================================================================================
+===================================================================================
+
+
+
+I get this error when i run i run the file:
+
+/home//Documents/mqtt/node_modules/jsonschema/lib/validator.js:107
+    throw new SchemaError('Expected `schema` to be an object or boolean');
+    ^
+SchemaError: Expected `schema` to be an object or boolean
+    at Validator.validate (/home//Documents/mqtt/node_modules/jsonschema/lib/validator.js:107:11)
+    at Object.validate (/home//Documents/mqtt/node_modules/mosca/lib/options.js:264:26)
+    at new Server (/home//Documents/mqtt/node_modules/mosca/lib/server.js:104:34)
+    at Object.<anonymous> (/home//Documents/mqtt/broker.js:16:14)
+    at Module._compile (internal/modules/cjs/loader.js:1137:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+    at internal/main/run_main_module.js:17:47 {
+  schema: undefined
+}
+
+I am running:
+
+node: v12.18.4
+
+npm: 6.14.6
+node.js
+mqtt
+mosca
+Share
+Improve this question
+Follow
+asked Oct 3 '20 at 21:11
+James Davies
+3111 silver badge22 bronze badges
+
+    1
+    Don't you have to define your data store?? github.com/moscajs/mosca For that matter, you 
+    should be running Aedes rather than Mosca: github.com/moscajs/aedes – JD Allen Oct 4 '20 at 
+    1:35 
+
+Add a comment
+
+
+Answers
+-------------------------------------------------
+2
+
+comment this line in validator.js (\node_modules\jsonschema\lib\validator.js:111):
+
+if((typeof schema !== 'boolean' && typeof schema !== 'object') || schema === null){
+     throw new SchemaError('Expected `schema` to be an object or boolean');
+}
+
+
+
+>3
+===================================================================================
+===================================================================================
+
+
+webSocketServer node.js how to differentiate clients
+
+
+28
+
+I am trying to use sockets with node.js, I succeded but I don't know how to differentiate 
+clients in my code. The part concerning sockets is this:
+
+var WebSocketServer = require('ws').Server, 
+    wss = new WebSocketServer({port: 8080});
+wss.on('connection', function(ws) {
+    ws.on('message', function(message) {
+        console.log('received: %s', message); 
+        ws.send(message);
+    });
+    ws.send('something');
+});
+
+This code works fine with my client js.
+
+But I would like to send a message to a particular user or all users having sockets open on my 
+server.
+
+In my case I send a message as a client and I receive a response but the others user show nothing.
+
+I would like for example user1 sends a message to the server via webSocket and I send a 
+notification to user2 who has his socket open.
+
+
+
+Answers 
+
+-------------------------------------------------
+62
+
+You can simply assign users ID to an array CLIENTS[], this will contain all users. You can 
+directly send message to all users as given below:
+
+var WebSocketServer = require('ws').Server,
+    wss = new WebSocketServer({port: 8080}),
+    CLIENTS=[];
+
+wss.on('connection', function(ws) {
+    CLIENTS.push(ws);
+    ws.on('message', function(message) {
+        console.log('received: %s', message);
+        sendAll(message);
+    });
+    ws.send("NEW USER JOINED");
+});
+
+function sendAll (message) {
+    for (var i=0; i<CLIENTS.length; i++) {
+        CLIENTS[i].send("Message: " + message);
+    }
+}
+
+
+-------------------------------------------------
+99
+
+In nodejs you can directly modify the ws client and add custom attributes for each client 
+separately. Also you have a global variable wss.clients and can be used anywhere. Please try 
+the next code and try to connect at leat two clients:
+
+var WebSocketServer = require('ws').Server;
+var wss = new WebSocketServer({
+    server: httpsServer
+});
+
+
+wss.getUniqueID = function () {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    }
+    return s4() + s4() + '-' + s4();
+};
+
+wss.on('connection', function connection(ws, req) {
+    ws.id = wss.getUniqueID();
+
+    wss.clients.forEach(function each(client) {
+        console.log('Client.ID: ' + client.id);
+    });
+});
+
+You can also pass parameters directly in the client connection URL:
+
+https://myhost:8080?myCustomParam=1111&myCustomID=2222
+
+In the connection function you can get these parameters and to assign these parameters directly 
+to your ws client:
+
+wss.on('connection', function connection(ws, req) {
+
+    const parameters = url.parse(req.url, true);
+
+    ws.uid = wss.getUniqueID();
+    ws.chatRoom = {uid: parameters.query.myCustomID};
+    ws.hereMyCustomParameter = parameters.query.myCustomParam;
+}
+
+
+-------------------------------------------------
+11
+
+you can use request header 'sec-websocket-key'
+
+wss.on('connection', (ws, req) => {
+  ws.id = req.headers['sec-websocket-key']; 
+
+  //statements...
+});
+
+
+It depends which websocket you are using. For example, the fastest one, found here: 
+https://github.com/websockets/ws is able to do a broadcast via this method:
+
+var WebSocketServer = require('ws').Server,
+   wss = new WebSocketServer({host:'xxxx',port:xxxx}),
+   users = [];
+wss.broadcast = function broadcast(data) {
+wss.clients.forEach(function each(client) {
+  client.send(data);
+ });
+};
+
+Then later in your code you can use wss.broadcast(message) to send to all. For sending a PM to 
+an individual user I do the following:
+
+(1) In my message that I send to the server I include a username (2) Then, in onMessage I save 
+the websocket in the array with that username, then retrieve it by username later:
+
+wss.on('connection', function(ws) {
+
+  ws.on('message', function(message) {
+
+      users[message.userName] = ws;
+
+(3) To send to a particular user you can then do users[userName].send(message);
+
+
+-------------------------------------------------
+4
+
+I'm using fd from the ws object. It should be unique per client.
+
+var clientID = ws._socket._handle.fd;
+
+I get a different number when I open a new browser tab.
+
+The first ws had 11, the next had 12.
+
+
+-------------------------------------------------
+3
+
+You can check the connection object. It has built-in identification for every connected 
+client; you can find it here:
+
+let id=ws._ultron.id;
+console.log(id);
+
+
+>4
+===================================================================================
+===================================================================================
+
+-------------------------------------------------
+2
+
+I have variable for example
+
+var x = "this is X value";
+
+How to check in node.js if variable is JSON object ?
+
+
+Answers
+-------------------------------------------------
+55
+
+Your question is not clear, but assuming you meant to check if a variable has an unparsed JSON 
+string:
+
+try {
+    JSON.parse(x);
+} catch (e) {
+    console.log("not JSON");
+}
+
+
+
+>5
+===================================================================================
+===================================================================================
+
+node.js - request - How to “emitter.setMaxListeners()”?
+
+
+-------------------------------------------------
+
+When I do a GET on a certain URI using the node.js 'request' module;
+
+var options = {uri:"aURI", headers:headerData};
+request.get(options, function (error, response, body) {
+}
+
+The error message is:
+
+[Error: Exceeded maxRedirects. Probably stuck in a redirect loop.]
+
+and there is also the following message:
+
+"(node) warning: possible EventEmitter memory leak detected. 11 listeners added. Use 
+emitter.setMaxListeners() to increase limit."
+
+How do I setMaxListeners?
+
+
+-------------------------------------------------
+84
+
+I strongly advice NOT to use the code:
+
+process.setMaxListeners(0);
+
+The warning is not there without reason. Most of the time, it is because there is an error
+hidden in your code. Removing the limit removes the warning, but not its cause, and prevents 
+you from being warned of a source of resource leakage.
+
+If you hit the limit for a legitimate reason, put a reasonable value in the function 
+(the default is 10).
+
+Also, to change the default, it is not necessary to mess with the EventEmitter prototype. 
+you can set the value of defaultMaxListeners attribute like so:
+
+require('events').EventEmitter.defaultMaxListeners = 15;
+
+
+
+-------------------------------------------------
+33
+
+I use the code to increase the default limit globally:
+require('events').EventEmitter.prototype._maxListeners = 100;
+
+
+
+
+7
+
+Although adding something to nodejs module is possible, it seems to be not the best way 
+(if you try to run your code on other computer, the program will crash with the same error, 
+obviously).
+
+I would rather set max listeners number in your own code:
+
+var options = {uri:headingUri, headers:headerData, maxRedirects:100};
+request.setMaxListeners(0);
+request.get(options, function (error, response, body) {
+}
+
+
+-------------------------------------------------
+7
+
+This is how I solved the problem:
+
+In main.js of the 'request' module I added one line:
+
+Request.prototype.request = function () {
+  var self = this
+  self.setMaxListeners(0); // Added line
+
+This defines unlimited listeners 
+http://nodejs.org/docs/v0.4.7/api/events.html#emitter.setMaxListeners
+
+In my code I set the 'maxRedirects' value explicitly:
+
+var options = {uri:headingUri, headers:headerData, maxRedirects:100};
+
+
+
+>6
+===================================================================================
+===================================================================================
+
+>7
+===================================================================================
+===================================================================================
+
+>8
+===================================================================================
+===================================================================================
