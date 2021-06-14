@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0px;
+    padding: 0px;
+	font-family: Constantia, "Lucida Bright", "DejaVu Serif", Georgia, "serif";
+}
+#sidebar {
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background: #151719;
+	left: -200px;
+	transition: all 500ms linear;
+}
+#sidebar .active {
+	left: 0px;
+}
+#sidebar ul li{
+	color: rgba(230,230,230,0.9);
+	list-style: none;
+	padding: 15px 10px;
+	border-bottom: 1px solid rgba(100,100,100,0.10);
+	
+}
+#sidebar .toggle-btn {
+	position: absolute;
+	left: 231px;
+	
+}
+#sidebar .toggle-btn span {
+    display: block;
+	width: 50px;
+	height: 5px;
+	background: #151719;
+	
+}
