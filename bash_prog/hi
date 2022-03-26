@@ -1,34 +1,52 @@
 #!/bin/bash
+# this program wishes you as per the day time
 
+# this variable hold the current time
 myHr=$(date +%H)
-e=4
-f=6
-g=8
-a=12
-b=16
-c=22
-d=23
+# myHr=5
+# echo $myHr
 
 
-if [ $myHr -lt $e ]
-then echo "Welcome Sir!! Enjoying night work!!" 
+# declaring some variable to different the time intervals
+time_4=4
+time_6=6
+time_8=8
+time_12=12
+time_13=13
+time_16=16
+time_22=22
+time_0=24
 
-elif [ $myHr -lt $f ]
-then echo "Welcome Sir!! Good Bharama Mhurata..!! Glad to see you at this time :]"
-
-elif [ $myHr -lt $g ]
-then echo "Welcome Sir!! Very Very !! Good Morning..."
-
-elif [ $myHr -lt $a ]
-then echo "Welcome Sir!! Good Morning.."
-
-elif [ $myHr -lt $b ]
-then echo "Welcome Sir!! Good Noon!!"
-
-elif [ $myHr -lt $c ] 
-then echo "Welcome Sir!! Good evening.."
-
-elif [ $myHr -lt $d ]
-then echo "Welcome Sir!! Time to Sleep!!"
-
+# if time is less than 4am
+if [ $myHr -lt $time_4 ]
+then echo "Welcome Sir!! Enjoying night work!!" | figlet -f future | lolcat
+    
+    # if time is less than 6am
+elif [ $myHr -lt $time_6 ]
+then echo "Welcome Sir!! Good Bharama Muhurata..!! Glad to see you at this time :)" | figlet -f future | lolcat
+    
+    # if time is less then 8am
+elif [ $myHr -lt $time_8 ]
+then echo "Welcome Sir!! Very Very !! Good Morning..." | figlet -f future | lolcat
+    
+    # if time is less than 12pm
+elif [ $myHr -lt $time_12 ]
+then echo "Welcome Sir!! Good Morning.." | figlet -f future | lolcat
+    
+    # if time is less than 1pm
+elif [ $myHr -lt $time_13 ]
+then echo "Welcome Sir!! Good Noon!!" | figlet -f future | lolcat
+    
+    # if time is less than 4pm
+elif [ $myHr -lt $time_16 ]
+then echo "Welcome Sir!! Good Afternoon!!" | figlet -f future | lolcat
+    
+    # if time is less than 10pm
+elif [ $myHr -lt $time_22 ]
+then echo "Welcome Sir!! Good evening.." | figlet -f future | lolcat
+    
+    # if time is less than 12am
+elif [ $myHr -lt $time_0 ]
+then echo "Welcome Sir!! Time to Sleep!!" | figlet -f future | lolcat
+    
 fi

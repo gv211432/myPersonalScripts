@@ -21,4 +21,4 @@ no=$((${#reNewIp}-3))
 myip=${reNewIp}
 reqIp=${myip:0:${no}}
 print '\x1b[6;30;42m My Private Ip is : \x1b[0m '$reqIp
-figlet -f future $reqIp | lolcat
+figlet -f future $reqIp | lolcat -r

@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-date | figlet -f future -w 120 | lolcat -i
+date | figlet -f future -w 120 | lolcat

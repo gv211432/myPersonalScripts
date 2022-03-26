@@ -1,0 +1,73 @@
+#!/bin/bash
+constantDir="/home/boss/Documents/myPersonalScripts/bash_prog/cpproj-essentials"
+presentDir=$(pwd)
+ls ${1}
+
+# Creating an array to take the directory names
+declare -a arr
+
+arr=($(echo ${1} | tr "/" " "))
+
+# apps name would be the last element in the array
+appName="null"
+
+for word in ${arr[*]}
+do
+    appName=$word
+done
+echo $appName
+
+# # Trying to create the project in the present working directory
+if [ -d ${1} ]
+then
+    echo "Directory already exist!!" | lolcat -r
+else
+    echo "Great creating your project.. :)" | lolcat -r
+    
+    mkdir -p ${1}
+    
+    cd ${1}
+    
+    if ! [ -d OBJ ]
+    then
+        mkdir OBJ
+    fi
+    
+    if ! [ -d SRC ]
+    then
+        mkdir SRC
+    fi
+    
+    if ! [ -f README.md ]
+    then
+        figlet All about ${appName} -f future > README.md
+    fi
+    
+    if ! [ -f Makefile ]
+    then
+        cat ${constantDir}/make_templet > Makefile
+        sed -i 's/__APPNAME__/'${appName}'/g' Makefile
+    fi
+    
+    if ! [ -f ${appName}.cpp ]
+    then
+        touch ${appName}.cpp
+        cat ${constantDir}/main_templet > ${appName}.cpp
+    fi
+    
+    touch ${appName}
+    chmod +x ${appName}
+    
+    if ! [ -f docs.txt ]
+    then
+        touch docs.txt
+        figlet ${appName} "documentation" -f future > docs.txt
+    fi
+    
+    make
+    sleep 1
+    make run
+    cd $presentDir
+    
+    echo "Created project "${presentDir}/${appName} | lolcat -r
+fi

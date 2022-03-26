@@ -1,0 +1,14 @@
+#!/bin/bash
+
+name=${1}
+#tesseract ${name} ${name}
+# this will use tesseract for optical character recogination and create -
+# a text file with image name and dump the produced content in it
+tesseract ${name} stdout | tr '\n' ' ' > ${name}.txt
+echo
+echo "===================== Start ==========================" | lolcat -r
+echo
+# this will print the content of the file just created in the terminal
+cat ${name}.txt
+echo
+echo "====================== End ===========================" | lolcat -r

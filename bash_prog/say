@@ -1,0 +1,15 @@
+#!/bin/bash
+
+name=${1}
+#tesseract ${name} ${name}
+tesseract ${name} stdout | tr '\n' ' ' | tr -d '_' > ${name}.txt
+echo 
+echo "===================== Start ==========================" | lolcat -r
+echo
+
+cat ${name}.txt
+echo
+echo "====================== End ===========================" | lolcat -r
+
+espeak-ng -s 165 -f ${name}.txt
+

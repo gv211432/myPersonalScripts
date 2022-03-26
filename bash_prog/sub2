@@ -1,0 +1,9 @@
+#!/bin/bash
+
+ip=($(ip a | grep 192.168.))
+gotip=${ip[1]}
+
+mosquitto_sub -h vishwakarmahome.tk -p 8883 -t "/tokenid/outTopic" -P "92244@Great" -u "gaurav"
+
+
+exit 0

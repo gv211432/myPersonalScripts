@@ -1,0 +1,5 @@
+!#/bin/bash
+code /home/boss/Documents/node_projects/express-typescript/
+firefox localhost:3000
+cd /home/boss/Documents/node_projects/strapi_mongodb/
+sudo yarn develop

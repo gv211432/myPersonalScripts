@@ -1,0 +1,17 @@
+#!/bin/bash
+# this program try to read the content of images present in the current directory
+# and dump the content in the text file name "ocrdir.txt"
+rm ocrdir.txt
+
+# this loop executes the given command below for every file with exention ".png"
+for FILE in *.png
+do
+    #this code appends the ocr generated content in the ocrdir.txt file
+    tesseract "${FILE}" stdout | tr '\n' ' ' >>ocrdir.txt
+    echo >>ocrdir.txt
+    echo >>ocrdir.txt
+done
+
+echo
+# Prints "Done" when program is complete
+echo "Done" | lolcat -r

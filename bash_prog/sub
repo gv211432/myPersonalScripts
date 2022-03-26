@@ -1,10 +1,9 @@
 #!/bin/bash
 
-ip=($(ip a | grep 192.168.))
-gotip=${ip[1]}
+#ip=($(ip a | grep 192.168.))
+#gotip=${ip[1]}
 
-mosquitto_sub -h localhost -p 1883 -t "/tokenid/outTopic" -P "92244@Great" -u "gaurav"
+mosquitto_sub -h localhost -p 1883 -t "/6154359d5288e8424a94ec0a/outTopic" -P "92244@Great" -u "gv211432@gmail.com"
 
-echo 
 
 exit 0
