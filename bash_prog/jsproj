@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mkdir $1
+touch ./$1/index.js
+touch ./$1/docs.txt
+# echo "node index" >> Makefile

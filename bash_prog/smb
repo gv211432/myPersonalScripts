@@ -1,8 +1,8 @@
-Starting Nmap 7.92 ( https://nmap.org ) at 2022-03-14 14:12 IST
-Nmap scan report for 192.168.221.109
-Host is up (0.0038s latency).
-Nmap scan report for _gateway (192.168.221.180)
-Host is up (0.0043s latency).
-Nmap scan report for fedora35 (192.168.221.229)
-Host is up (0.00032s latency).
-Nmap done: 256 IP addresses (3 hosts up) scanned in 8.69 seconds
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-05-23 12:18 IST
+Nmap scan report for _gateway (192.168.212.152)
+Host is up (0.0049s latency).
+Nmap scan report for fedora36 (192.168.212.229)
+Host is up (0.00079s latency).
+Nmap scan report for 192.168.212.246
+Host is up (0.0027s latency).
+Nmap done: 256 IP addresses (3 hosts up) scanned in 7.20 seconds

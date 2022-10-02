@@ -1,0 +1,3 @@
+#!/bin/bash
+dosbox -conf /home/boss/Documents/myPersonalScripts/bash_prog/tc3MntSrc.bat
+

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ $1 ]
+then
+    
+    # # Trying to create the project in the present working directory
+    if test -f $1;
+    then
+        # echo "Directory already exist!!" | lolcat -r
+        
+        # operating directory
+        opDir="/home/boss/.mozilla/firefox/e6faqx80.default-release/chrome/img"
+        # arr=$(ls | tr "/" " ")
+        
+        num=0
+        for name in `ls $opDir`
+        do
+            num=$(($num+1))
+            # echo $num $name # debug name and number
+        done
+        num=$(($num+1))
+        echo $num
+        
+        if test -f ${opDir}/3.jpg
+        then
+            mv ${opDir}/3.jpg ${opDir}/${num}.jpg
+        fi
+        cp $1 ${opDir}/3.jpg
+        echo "BG imgae changed!! Please reload firefox..✅"
+        # echo ${#arr[@]}
+    else
+        echo "!! No such file ❌"
+    fi
+else
+    echo "Please pass image name 😅 !!"
+fi

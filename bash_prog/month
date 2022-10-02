@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+data=$(cal)
+
+# echo ${data:2}
+# for d in ${#data}
+# do
+#     echo ${d:1}
+# done
+# echo $data
+cal
+i=${#data}
+no=0
+multiply=1
+echo $no
+# echo $i
+while [ $i -gt 0 ]
+do
+    if [ ${data:$i:1} -ne " " ]
+    then
+        echo ${data:$i:1}
+    fi
+    # echo $i
+    # echo ${data:$i:1}
+    i=$(($i - 1))
+done

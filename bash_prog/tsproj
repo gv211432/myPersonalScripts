@@ -1,0 +1,8 @@
+#!/bin/bash
+
+mkdir $1
+touch ./$1/index.ts
+touch ./$1/docs.txt
+# echo "node index" >> Makefile
+sleep 1
+cd ./$1
