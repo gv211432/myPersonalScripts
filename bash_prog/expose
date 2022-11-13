@@ -1,0 +1,29 @@
+#!/bin/bash
+if [ $1 ]
+then
+    echo
+else
+    echo "Exiting..."
+    
+    echo "expose <port> ....to expose to internet"
+    echo "expose stop ....to stop the service"
+    exit 1
+fi
+
+if [ $1 == "stop" ]
+then
+    killall ngrok
+    echo "stopping..."
+    exit 0
+fi
+
+if [[ $1 -gt 10  &&  $1 -lt 65535 ]]
+then
+    echo "Processing..."
+    ngrok http $1 > /dev/null &
+    sleep 4
+    url = $(curl -s https://localhost:4040/api/tunnels | jq ".tunnels[0].public_url")
+    qrencode $url -s 16 -m 12 -o /tmp/qr.jpeg
+    sushi /tmp/qr.jpeg
+    echo "Completed: $url"
+fi

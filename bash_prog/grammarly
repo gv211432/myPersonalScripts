@@ -1,0 +1,35 @@
+#!/bin/node
+
+const http = require("http");
+const { exec } = require("child_process");
+const fileSystem = require("fs");
+const path = require("path");
+
+//create a server object:
+let server = http.createServer(async (req, res, callback) => {
+  var filePath = path.join(__dirname, "grammarly.html");
+  var stat = fileSystem.statSync(filePath);
+
+  res.writeHead(200, {
+    "Content-Type": "text/html",
+    "Content-Length": stat.size,
+  });
+
+  var readStream = fileSystem.createReadStream(filePath);
+  // We replaced all the event handlers with a simple call to readStream.pipe()
+  let done = await readStream.pipe(res);
+  Promise.all([done]).then(value=>{
+    server.close();
+  })
+});
+
+server.listen(7777); //the server object listens on port 8080
+
+exec("firefox http://localhost:7777", (error) => {
+  if (error) {
+    console.log(`error: ${error.message}`);
+    return;
+  }
+});
+
+console.log("Opened editor on http://localhost:7777");

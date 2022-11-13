@@ -1,0 +1,7 @@
+#!/bin/bash
+ip=($(ip a | grep 192.168.))
+reNewIp=${ip[1]}
+no=$((${#reNewIp}-3))
+myip=${reNewIp}
+reqIp=${myip:0:${no}}
+echo $reqIp

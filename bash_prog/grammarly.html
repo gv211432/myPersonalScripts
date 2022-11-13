@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        background-color: rgb(114, 103, 49);
+      }
+      form{
+        margin-top: 30px;
+
+      }
+      .my-form > * {
+        padding: 0.7em 0.7em;
+        margin: 5px;
+        border: 2px black solid;
+        border-radius: 3px;
+        width: 18em;
+      }
+      textarea.txt-in {
+        /* padding: 0.7em 1.5em; */
+        width: 90%;
+        height: 90%;
+      }
+    </style>
+    <script>
+      window.onbeforeunload = function (event) {
+        return confirm("Confirm refresh");
+      };
+    </script>
+    <title>Contact</title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="#" class="my-form">
+        <textarea
+          class="txt-in"
+          placeholder="Message"
+          style="height: 200px"
+        ></textarea
+        ><br />
+      </form>
+    </div>
+  </body>
+</html>
