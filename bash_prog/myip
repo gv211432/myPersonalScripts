@@ -1,6 +1,6 @@
-#!/bin/zsh
+#!/bin/bash
 
-#COMMANDS CREATED INSIDE /ETC/BASH.BASHRC FILE
+# COMMANDS CREATED INSIDE /ETC/BASH.BASHRC FILE
 # USING ANSI COLORS
 RED="\e[31m"
 ORANGE="\e[33m"
@@ -9,16 +9,18 @@ GREEN="\e[92m"
 STOP="\e[0m"
 
 echo ""
-myip=($(curl -s ipinfo.io/ip)) #will send get request and get my public ip..
-print '\x1b[6;30;42m My Public Ip is : \x1b[0m '$myip 
+myip=$(curl -s ipinfo.io/ip) # Fetch the public IP
+printf '\x1b[6;30;42m My Public IP is : \x1b[0m %s\n' "$myip"
+echo ""
 printf "${ORANGE}"
-figlet -f future $myip
+figlet -f future "$myip"
 printf "${STOP}"
 
-ip=($(ip a | grep 192.168.))
-reNewIp=${ip[2]}
-no=$((${#reNewIp}-3))
-myip=${reNewIp}
-reqIp=${myip:0:${no}}
-print '\x1b[6;30;42m My Private Ip is : \x1b[0m '$reqIp
-figlet -f future $reqIp | lolcat -r
+# Get all private IP addresses and list them
+echo ""
+printf '\x1b[6;30;42m My Private IPs are : \x1b[0m\n'
+ip -o -4 addr show | awk '/scope global/ {print $4}' | while read -r private_ip; do
+  # Print each private IP
+  echo "$private_ip"
+  figlet -f future "$private_ip" | lolcat
+done
